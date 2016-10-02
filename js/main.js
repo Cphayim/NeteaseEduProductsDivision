@@ -192,6 +192,9 @@ function setText(obj, str) {
 		obj.innerHTML = '';
 	}, 3000);
 }
+/**
+ * 页面初始化 
+ */
 //检查提醒状态
 if (cookie.get().notTip !== 'yes') {
 	document.querySelector('.g-hd-top').style.display = "block";
@@ -261,7 +264,7 @@ addEvent($('notTip'), 'click', function() {
 	addEvent(loginBtn, 'click', function() {
 		var userName = $('userName').value,
 			password = $('password').value;
-		//防止连续点击
+		//防止连续点击登录
 		var that = this;
 		that.setAttribute('disabled', '');
 		setTimeout(function() {
@@ -376,6 +379,7 @@ addEvent($('notTip'), 'click', function() {
 	var slider = document.querySelector('.slider'),
 		target = 0,
 		timer = null;
+
 	function autoPlay() {
 		if (timer) {
 			clearInterval(timer);
@@ -383,7 +387,7 @@ addEvent($('notTip'), 'click', function() {
 		timer = setInterval(function() {
 			target++;
 			slider.style.left = -target + 'px';
-			if (target === 1620 ) {
+			if (target === 1620) {
 				target = 0;
 			}
 		}, 60);
@@ -392,24 +396,72 @@ addEvent($('notTip'), 'click', function() {
 })();
 //课程模块**未完成
 (function() {
-	var tab = $('tab');
-	var design = tab.getElementsByTagName('div')[0],
-		program = tab.getElementsByTagName('div')[1];
+	var tab = $('tab'),
+		tabBtn = tab.getElementsByTagName('div'),
+		courseLists = $('courseList').querySelectorAll('.cl'); //课程列表,[0]为产品,[1]为编程
+	var curTab = 0; //当前tab,10为产品,20为编程
+	var pageIndex = 0; //当前页码
+	for (var i = 0; i < tabBtn.length; i++) {
+		tabBtn[i].index = i;
+	}
 	//设置当前tab
-	function setCur(obj) {
+	function setCur(obj, index) {
 		var tabs = tab.getElementsByTagName('div');
 		for (var i = 0; i < tabs.length; i++) {
 			removeClass(tabs[i], 'z-cur');
+			courseLists[i].style.display = 'none';
 		}
 		addClass(obj, 'z-cur');
+		courseLists[index].style.display = 'block';
+		curTab = index === 0 ? 10 : 20;
+		//
+		console.log('curTab=' + curTab);
+		pageLoad(curTab,1);
 	}
+
+	/**
+	 * @param {Object} type 类型 10:产品,20:编程
+	 * @param {Object} pageNo 当前页码
+	 */
+	function pageLoad(type, pageNo) {
+		var curList = type ===10?courseLists[0]:courseLists[1];
+		console.log(curList);
+		ajax({
+			method: 'GET',
+			url: 'http://study.163.com/webDev/couresByCategory.htm',
+			data: {
+				pageNo: pageNo,
+				psize: 20,
+				type: type
+			},
+			success: function(data) {
+				console.log('Course list request succeed.');
+				var info = JSON.parse(data);//转为js对象
+				var list = info.list;//课程列表
+				//清空课程列表
+				curList.innerHTML = '';
+				for(var i=0;i<list.length;i++){
+					//价格
+					var price = list[i].price?'￥'+list[i].price:'免费';
+					curList.innerHTML+='<div class="m-course"><img src="'+list[i].bigPhotoUrl+'"><p class="courseName">'+list[i].name+'</p><p class="provider">'+list[i].provider+'</p><span class="learnerCount">'+list[i].learnerCount+'</span><span class="price">'+price+'</span><div class="detail"><img src="'+list[i].bigPhotoUrl+'" /><h4>'+list[i].name+'</h4><span class="learnerCount">'+list[i].learnerCount+'人在学</span><p class="categoryName">发布者：'+list[i].provider+'<br />分类：'+list[i].categoryName+'</p><p class="description">'+list[i].description+'</p></div></div>';
+				}
+			},
+			error: function(data) {
+				console.log('Course list request failed, error stutas: ' + data);
+			}
+		});
+	}
+	//tab切换事件
 	addEvent(tab, 'click', function(e) {
 		e = e || window.event;
 		var target = e.target || e.srcElement;
-		if (target.nodeName.toLowerCase() == 'div') {
-			setCur(target);
+		//检查事件目标为按钮，且不在活动状态
+		if (target.nodeName.toLowerCase() == 'div' && !hasClass(target, 'z-cur')) {
+			setCur(target, target.index);
 		}
 	});
+	//页面初始化时加载第一页
+	tabBtn[0].click();
 })();
 //视频模块
 (function() {

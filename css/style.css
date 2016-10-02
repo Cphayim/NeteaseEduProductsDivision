@@ -1,4 +1,5 @@
 /* reset */
+
 html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu {
 	margin: 0;
 	padding: 0;
@@ -65,7 +66,6 @@ body {
 a, a:hover {
 	color: #333;
 }
-
 body {
 	font: 12px/1.14 "Arial", "Hiragino Sans GB", \5fae\8f6f\96c5\9ed1, "Microsoft YaHei", "Helvetica", "sans-serif";
 }
@@ -422,7 +422,7 @@ body {
 	position: relative;
 	height: 220px;
 }
-.m-picture .slider div{
+.m-picture .slider div {
 	position: absolute;
 	width: 1620px;
 }
@@ -436,6 +436,7 @@ body {
 .m-tab {
 	width: 400px;
 	height: 50px;
+	margin-bottom: 20px;
 	box-shadow: 1px 1px 1px #dcdcdc;
 	font: 20px/50px 'Microsoft YaHei';
 	color: #666;
@@ -448,14 +449,98 @@ body {
 	text-align: center;
 	background-color: #fff;
 	cursor: pointer;
-	/*transition: all .3s linear;*/
+	transition: all .2s linear;
 }
 .m-tab div.z-cur {
 	background-color: #39A030;
 	color: #fff;
 }
-.m-content {}
-
+.m-content {
+	min-height: 1240px;
+	margin-left: -10px;
+}
+.m-course {
+	position: relative;
+	float: left;
+	width: 225px;
+	height: 228px;
+	margin: 10px;
+	box-shadow: 0 1px 1px 1px #E6E6E6;
+	background-color: #fff;
+	font: 12px/12px 'Microsoft YaHei';
+}
+.m-course img {
+	width: 223px;
+	height: 124px;
+	margin: 1px 1px 10px 1px;
+}
+.m-course .courseName {
+	padding: 0 5px;
+	overflow: hidden;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+	color: #333;
+}
+.m-course .provider {
+	padding: 10px 5px;
+	color: #999;
+}
+.m-course .learnerCount {
+	display: inline-block;
+	height: 16px;
+	line-height: 16px;
+	margin-left: 5px;
+	padding: 0 4px 0 18px;
+	border: 1px solid #dddddd;
+    border-radius: 2px;
+	background-image: url(../img/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -276px -154px;
+	font-size: 10px;
+	color: #999;
+}
+.m-course .price {
+	display: block;
+	margin: 10px 5px;
+	color: #ff3f00;
+}
+.m-course .detail{
+	display: none;
+	position: absolute;left: 0;top: 0;z-index: 30;
+	width: 470px;
+	min-height: 228px;
+	margin: -10px 0 0 -10px;
+	padding: 10px;
+	box-shadow: 0 1px 1px 1px #ccc;
+	background-color: #fff;
+}
+.m-course:hover .detail{
+	display: block;
+}
+.m-course .detail img{
+	float: left;
+}
+.m-course .detail h4{
+    margin: 0 10px 12px 233px;
+	font: 20px/26px 'Microsoft YaHei';
+    color: #333;
+}
+.m-course .detail .learnerCount{
+	border: none;
+}
+.m-course .detail .categoryName{
+	height: 40px;
+    font: 12px/20px 'Microsoft YaHei';
+    padding: 10px 0 0 233px;
+    color: #666;
+}
+.m-course .detail .description{
+	clear: both;
+    width: 426px;
+    padding: 10px 0 0 16px;
+    font: 14px/24px 'Microsoft YaHei';
+}
 /* 侧栏课程 */
 
 .m-video, .m-hotRanking {
@@ -468,7 +553,7 @@ body {
 }
 .m-video h4, .m-hotRanking h4 {
 	position: relative;
-	z-index: 51;
+	z-index: 21;
 	height: 55px;
 	padding-left: 20px;
 	border-bottom: 1px solid #dddddd;
@@ -530,7 +615,7 @@ body {
 .m-hotRanking .roll {
 	position: absolute;
 	top: 56px;
-	z-index: 50;
+	z-index: 20;
 }
 .m-hotRanking .roll a {
 	display: block;
@@ -589,7 +674,7 @@ body {
 .m-ft a {
 	font-size: 15px;
 }
-.m-ft a:hover{
+.m-ft a:hover {
 	text-decoration: underline;
 }
 .m-ft span {
@@ -616,13 +701,14 @@ body {
 .m-ft .friendLink {
 	width: 205px;
 }
-.m-ft .about,.m-ft .more{
+.m-ft .about, .m-ft .more {
 	width: 140px;
 }
-.m-ft .about .icon{
+.m-ft .about .icon {
 	margin-right: 80px;
 	background-position: -210px -150px;
 }
+
 /* 功能(.f-) */
 
 .f-dn {
@@ -646,6 +732,9 @@ body {
 	.min-width {
 		min-width: 960px;
 		margin: auto;
+	}
+	.g-bd-bot {
+		width: 980px;
 	}
 	.g-bd-l {
 		width: 734px;
