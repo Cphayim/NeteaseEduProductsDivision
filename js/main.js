@@ -105,7 +105,7 @@ var ajax = function(opts) {
 	}
 };
 /**
- * 运动框架 
+ * 运动函数
  * @param {Object} obj 节点对象
  * @param {Object} attr 属性
  * @param {Object} itarget 目标值
@@ -169,32 +169,20 @@ function removeClass(obj, cls) {
 	}
 }
 //事件注册
-var addEvent = document.addEventListener ?
-	function(elem, type, listener, useCapture) {
-		elem.addEventListener(type, listener, useCapture);
-	} :
-	function(elem, type, listener, useCapture) {
-		elem.attchEvent('on' + type, listener);
-	};
-
-//取消事件注册
-var delEvent = document.removeEventListener ?
-	function(elem, type, listener, useCapture) {
-		elem.removeEventListener(type, listener, useCapture);
-	} :
-	function(elem, type, listener, useCapture) {
-		elem.detachEvent('on' + type, listener);
-	};
-//修改提示文字
+function addEvent(obj, ev, fn) {
+	if (obj.attachEvent) {
+		obj.attachEvent('on' + ev, fn)
+	} else {
+		obj.addEventListener(ev, fn, false)
+	}
+}
+//提示文字
 function setText(obj, str) {
 	obj.innerHTML = str;
 	setTimeout(function() {
 		obj.innerHTML = '';
 	}, 3000);
 }
-/**
- * 页面初始化 
- */
 //检查提醒状态
 if (cookie.get().notTip !== 'yes') {
 	document.querySelector('.g-hd-top').style.display = "block";
@@ -394,15 +382,24 @@ addEvent($('notTip'), 'click', function() {
 	}
 	autoPlay();
 })();
-//课程模块**未完成
+//课程模块
 (function() {
 	var tab = $('tab'),
 		tabBtn = tab.getElementsByTagName('div'),
-		courseLists = $('courseList').querySelectorAll('.cl'); //课程列表,[0]为产品,[1]为编程
+		courseLists = $('courseList').querySelectorAll('.cl'),
+		oCoursePage = $('coursePage'),
+		aCoursePage = coursePage.getElementsByTagName('li'),
+		prePage = $('prePage'),
+		nextPage = $('nextPage');
 	var curTab = 0; //当前tab,10为产品,20为编程
-	var pageIndex = 0; //当前页码
+	var curPage = 0; //当前页码
+	//添加索引
 	for (var i = 0; i < tabBtn.length; i++) {
 		tabBtn[i].index = i;
+	}
+	for (var i = 0; i < aCoursePage.length; i++) {
+		//页码从1开始
+		aCoursePage[i].index = i + 1;
 	}
 	//设置当前tab
 	function setCur(obj, index) {
@@ -414,18 +411,11 @@ addEvent($('notTip'), 'click', function() {
 		addClass(obj, 'z-cur');
 		courseLists[index].style.display = 'block';
 		curTab = index === 0 ? 10 : 20;
-		//
-		console.log('curTab=' + curTab);
-		pageLoad(curTab,1);
+		pageLoad(curTab, 1);
 	}
-
-	/**
-	 * @param {Object} type 类型 10:产品,20:编程
-	 * @param {Object} pageNo 当前页码
-	 */
+	//课程页加载
 	function pageLoad(type, pageNo) {
-		var curList = type ===10?courseLists[0]:courseLists[1];
-		console.log(curList);
+		var curList = type === 10 ? courseLists[0] : courseLists[1];
 		ajax({
 			method: 'GET',
 			url: 'http://study.163.com/webDev/couresByCategory.htm',
@@ -436,14 +426,18 @@ addEvent($('notTip'), 'click', function() {
 			},
 			success: function(data) {
 				console.log('Course list request succeed.');
-				var info = JSON.parse(data);//转为js对象
-				var list = info.list;//课程列表
+				//将pageNo设为当前页
+				if (curPage) removeClass(aCoursePage[curPage - 1], 'z-cur');
+				addClass(aCoursePage[pageNo - 1], 'z-cur');
+				curPage = pageNo;
+				var info = JSON.parse(data); //转为js对象
+				var list = info.list; //课程列表
 				//清空课程列表
 				curList.innerHTML = '';
-				for(var i=0;i<list.length;i++){
-					//价格
-					var price = list[i].price?'￥'+list[i].price:'免费';
-					curList.innerHTML+='<div class="m-course"><img src="'+list[i].bigPhotoUrl+'"><p class="courseName">'+list[i].name+'</p><p class="provider">'+list[i].provider+'</p><span class="learnerCount">'+list[i].learnerCount+'</span><span class="price">'+price+'</span><div class="detail"><img src="'+list[i].bigPhotoUrl+'" /><h4>'+list[i].name+'</h4><span class="learnerCount">'+list[i].learnerCount+'人在学</span><p class="categoryName">发布者：'+list[i].provider+'<br />分类：'+list[i].categoryName+'</p><p class="description">'+list[i].description+'</p></div></div>';
+				for (var i = 0; i < list.length; i++) {
+					var price = list[i].price ? '￥' + list[i].price : '免费',
+						categoryName = list[i].categoryName ? list[i].categoryName : '无';
+					curList.innerHTML += '<div class="m-course"><img src="' + list[i].bigPhotoUrl + '"><p class="courseName">' + list[i].name + '</p><p class="provider">' + list[i].provider + '</p><span class="learnerCount">' + list[i].learnerCount + '</span><span class="price">' + price + '</span><div class="detail"><img src="' + list[i].bigPhotoUrl + '" /><h4>' + list[i].name + '</h4><span class="learnerCount">' + list[i].learnerCount + '人在学</span><p class="categoryName">发布者：' + list[i].provider + '<br />分类：' + categoryName + '</p><p class="description">' + list[i].description + '</p></div></div>';
 				}
 			},
 			error: function(data) {
@@ -455,12 +449,29 @@ addEvent($('notTip'), 'click', function() {
 	addEvent(tab, 'click', function(e) {
 		e = e || window.event;
 		var target = e.target || e.srcElement;
-		//检查事件目标为按钮，且不在活动状态
 		if (target.nodeName.toLowerCase() == 'div' && !hasClass(target, 'z-cur')) {
 			setCur(target, target.index);
 		}
 	});
-	//页面初始化时加载第一页
+	//翻页器事件
+	addEvent(oCoursePage, 'click', function(e) {
+		e = e || window.event;
+		var target = e.target || e.srcElement;
+		if (target.nodeName.toLowerCase() == 'li' && !hasClass(target, 'z-cur')) {
+			pageLoad(curTab, target.index);
+		}
+	});
+	addEvent(prePage,'click',function(){
+		if(curPage >1){
+			pageLoad(curTab,curPage-1);
+		}
+	});
+	addEvent(nextPage,'click',function(){
+		if(curPage < aCoursePage.length){
+			pageLoad(curTab,curPage+1);
+		}
+	});
+		//页面初始化时加载第一页
 	tabBtn[0].click();
 })();
 //视频模块
@@ -474,8 +485,8 @@ addEvent($('notTip'), 'click', function() {
 		popupVideo.style.display = 'block';
 	});
 	addEvent(close, 'click', function() {
-		playWindow.pause(); //暂停播放
 		popupVideo.style.display = 'none';
+		playWindow.pause(); //暂停播放
 	});
 })();
 //hotRanking模块
