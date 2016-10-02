@@ -45,7 +45,7 @@ var cookie = {
 		document.cookie = name + '=' + '; path=' + path + '; domain=' + domain + '; max-age=0';
 	}
 };
-//设置返回一个月后的时间，用于设置cookie
+//返回一个月后的时间，用于设置cookie
 function oneMonth() {
 	var date = new Date();
 	date.setMonth(date.getMonth() + 1);
@@ -53,6 +53,13 @@ function oneMonth() {
 }
 /**
  * ajax操作
+ * @param {Object} opts 对象
+ 		method 请求方法
+ 		url    请求地址
+ 		data   参数
+ 		async  是否异步
+ 		success 请求返回成功后执行的回调函数
+ 		error   请求返回失败后执行的回调函数
  */
 var ajax = function(opts) {
 	//默认参数
@@ -153,6 +160,8 @@ function getStyle(obj, attr) //getStyle 非行间属性  结果值为 ***px
 }
 /*
  * class操作
+ * @param {Object} obj 节点目标
+ * @param {Object} cls 操作的className
  */
 function hasClass(obj, cls) {
 	return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
@@ -168,7 +177,13 @@ function removeClass(obj, cls) {
 		obj.className = obj.className.replace(reg, ' ');
 	}
 }
-//事件注册
+
+/**
+ * 事件注册兼容
+ * @param {Object} obj 对象
+ * @param {Object} ev  事件类型
+ * @param {Object} fn  执行函数
+ */
 function addEvent(obj, ev, fn) {
 	if (obj.attachEvent) {
 		obj.attachEvent('on' + ev, fn)
@@ -176,14 +191,19 @@ function addEvent(obj, ev, fn) {
 		obj.addEventListener(ev, fn, false)
 	}
 }
-//提示文字
+
+/**
+ * 设置提示文本(用于登录表单验证提示)
+ * @param {Object} obj 对象
+ * @param {Object} str 提示字符串
+ */
 function setText(obj, str) {
 	obj.innerHTML = str;
 	setTimeout(function() {
 		obj.innerHTML = '';
 	}, 3000);
 }
-//检查提醒状态
+//检查是否提醒
 if (cookie.get().notTip !== 'yes') {
 	document.querySelector('.g-hd-top').style.display = "block";
 }
@@ -193,9 +213,7 @@ if (cookie.get().loginSuc !== undefined && cookie.get().followSuc === 'yes') {
 	addClass(followBtn, 'z-dis');
 	followBtn.getElementsByTagName('span')[0].innerHTML = '已关注';
 }
-/*
- * 事件绑定
- */
+
 //不再提醒
 addEvent($('notTip'), 'click', function() {
 	cookie.set('notTip', 'yes', oneMonth());
@@ -461,17 +479,17 @@ addEvent($('notTip'), 'click', function() {
 			pageLoad(curTab, target.index);
 		}
 	});
-	addEvent(prePage,'click',function(){
-		if(curPage >1){
-			pageLoad(curTab,curPage-1);
+	addEvent(prePage, 'click', function() {
+		if (curPage > 1) {
+			pageLoad(curTab, curPage - 1);
 		}
 	});
-	addEvent(nextPage,'click',function(){
-		if(curPage < aCoursePage.length){
-			pageLoad(curTab,curPage+1);
+	addEvent(nextPage, 'click', function() {
+		if (curPage < aCoursePage.length) {
+			pageLoad(curTab, curPage + 1);
 		}
 	});
-		//页面初始化时加载第一页
+	//页面初始化时加载第一页
 	tabBtn[0].click();
 })();
 //视频模块
@@ -496,7 +514,7 @@ addEvent($('notTip'), 'click', function() {
 		index = -1,
 		timer = null,
 		interval = 5000;
-	//hotRanking列表数据装载
+	//hotRanking数据加载
 	ajax({
 		method: 'GET',
 		url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
