@@ -14,7 +14,7 @@
  * 点击“了解更多>” 的跳转链接及打开方式相同。
  * 网易公开课:http://open.163.com/<br/>网易云课堂:http://study.163.com/<br/>中国大学 MOOC:http://www.icourse163.org/
  
-4. ###轮播图( 已完成✔️，使用CSS3 transition 控制透明度过度，IE8轮播时没有淡入效果 )
+4. ###轮播图( 已完成✔️，使用CSS3 transition 控制opacity，IE8轮播时没有淡入效果 )
  * 三张轮播图轮播效果:实现每 5s 切换图片,图片循环播放;鼠标悬停某张图片, 则暂停切换;切换效果使用入场图片 500ms 淡入的方式。点击后新开窗口打开目的页 面,对应的跳转链接如下：<br/>banner1:http://open.163.com/<br/>banner2:http://study.163.com/<br/>banner3:http://www.icourse163.org/
  
 5. ###左侧内容区 tab 切换( 已完成✔️ )
