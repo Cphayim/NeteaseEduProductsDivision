@@ -90,7 +90,16 @@ var ajax = function(opts) {
 		defaults.url += '?' + defaults.data;
 	}
 	//创建xhr
-	var xhr = new XMLHttpRequest();
+	var xhr;
+	if (window.XMLHttpRequest) {
+
+		xhr = new XMLHttpRequest();
+
+	} else {
+
+		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+
+	}
 	//开启请求
 	xhr.open(defaults.method, defaults.url, defaults.async);
 	//发送请求
@@ -185,9 +194,9 @@ function removeClass(obj, cls) {
  * @param {Object} fn  执行函数
  */
 function addEvent(obj, ev, fn) {
-	if (obj.attachEvent) {
+	if (obj.attachEvent) { //IE
 		obj.attachEvent('on' + ev, fn)
-	} else {
+	} else { //Chrome, FireFox, Safari...
 		obj.addEventListener(ev, fn, false)
 	}
 }
@@ -231,7 +240,7 @@ addEvent($('notTip'), 'click', function() {
 			addClass(followBtn, 'z-dis');
 			ajax({
 				method: 'GET',
-				url: 'https://study.163.com/webDev/attention.htm',
+				url: 'http://study.163.com/webDev/attention.htm',
 				success: function(data) {
 					if (data == "1") {
 						cookie.set('followSuc', 'yes', oneMonth());
@@ -270,19 +279,19 @@ addEvent($('notTip'), 'click', function() {
 		$('password').value = '';
 	});
 	//placeholder
-	addEvent(userNameBox,'focus',function(){
+	addEvent(userNameBox, 'focus', function() {
 		label[0].style.display = 'none';
 	});
-	addEvent(passwordBox,'focus',function(){
+	addEvent(passwordBox, 'focus', function() {
 		label[1].style.display = 'none';
 	});
-	addEvent(userNameBox,'blur',function(){
-		if(userNameBox.value == ''){
+	addEvent(userNameBox, 'blur', function() {
+		if (userNameBox.value == '') {
 			label[0].style.display = 'block';
 		}
 	});
-	addEvent(passwordBox,'blur',function(){
-		if(passwordBox.value == ''){
+	addEvent(passwordBox, 'blur', function() {
+		if (passwordBox.value == '') {
 			label[1].style.display = 'block';
 		}
 	});
@@ -304,7 +313,7 @@ addEvent($('notTip'), 'click', function() {
 			password = md5(password);
 			ajax({
 				method: 'GET',
-				url: 'https://study.163.com/webDev/login.htm',
+				url: 'http://study.163.com/webDev/login.htm',
 				data: {
 					userName: userName,
 					password: password
@@ -456,7 +465,7 @@ addEvent($('notTip'), 'click', function() {
 		var curList = type === 10 ? courseLists[0] : courseLists[1];
 		ajax({
 			method: 'GET',
-			url: 'https://study.163.com/webDev/couresByCategory.htm',
+			url: 'http://study.163.com/webDev/couresByCategory.htm',
 			data: {
 				pageNo: pageNo,
 				psize: 20,
@@ -537,7 +546,7 @@ addEvent($('notTip'), 'click', function() {
 	//hotRanking数据加载
 	ajax({
 		method: 'GET',
-		url: 'https://study.163.com/webDev/hotcouresByCategory.htm',
+		url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
 		success: function(data) {
 			console.log('hotRanking list request succeed.');
 			var list = JSON.parse(data);
