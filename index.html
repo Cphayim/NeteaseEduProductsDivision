@@ -5,55 +5,65 @@
 	<title>网易教育产品部</title>
 	<meta name="Keywords" content="网易,教育,产品,公开课,云课堂,中国大学MOOC" />
 	<link rel="stylesheet" href="css/style.css" />
-	<script src="js/md5.min.js"></script>
 	</head>
 	<body>
-		<!--头部-->
+		<!-- 头部 -->
 		<div class="g-hd min-width">
 			<div class="g-hd-top">
-				<!--顶部提示条-->
+				<!-- 顶部提示条 -->
 				<div class="m-tips wrap">
 					<h3>网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势&nbsp;&nbsp;<a href="#">立即查看&gt;</a></h3>
 					<span id="notTip">X&nbsp;不再提醒</span>
 				</div>
+				<!-- /顶部提示条 -->
 			</div>
 			<div class="g-hd-bot wrap">
-				<!--网站LOGO-->
+				<!-- 网站LOGO -->
 				<div class="m-logo">
-					<h1 class="icon">网易教育产品部</h1></div>
-				<!--关注-->
+					<h1 class="icon">网易教育产品部</h1>
+				</div>
+				<!-- /网站LOGO -->
+				<!-- 关注 -->
 				<div class="m-follow">
 					<div id="followBtn" class="u-follow icon"><span>关注</span>
 						<a id="cancelBtn">取消</a>
 					</div>
 					<span>粉丝</span><span>45</span>
 				</div>
+				<!-- /关注 -->
+				<!-- 头部导航 -->
 				<div class="m-nav">
 					<a href="http://open.163.com/" target="_blank">网易公开课</a>
 					<a href="http://study.163.com/" target="_blank">云课堂</a>
 					<a href="http://www.icourse163.org/" target="_blank">中国大学MOOC</a>
 					<a class="icon"></a>
 				</div>
-				<!--登录弹窗-->
+				<!-- /头部导航 -->
+				<!-- 登录弹窗 -->
 				<div class="m-popup">
 					<div class="mask"></div>
-					<!--登录框-->
+					<!-- /登录框 -->
 					<div class="m-login">
 						<span id="closePopup" class="icon"></span>
 						<h2>登录网易云课堂</h2>
 						<div class="inputBox">
-							<input type="text" id="userName" placeholder="帐号" autocomplete="off" />
-							<input type="password" id="password" placeholder="密码" /></div>
+							<label for="userName">帐号</label>
+							<input type="text" id="userName" autocomplete="off" />
+							<input type="password" id="password" /><label for="password">密码</label></div>
 						<p id="loginMess"></p>
 						<button id="loginBtn" class="icon">登录</button>
 					</div>
+					<!-- /登录框 -->
 				</div>
+				<!-- /登录弹窗 -->
 			</div>
 		</div>
-		<!--主体-->
+		<!-- /头部 -->
+		<!-- 主体 -->
 		<div class="g-bd min-width">
+			<!-- 主体-上部分 -->
 			<div class="g-bd-top">
-				<!--轮播图-->
+				<!-- 轮播图 -->
 				<div id="banner" class="m-banner">
 					<a href="http://open.163.com/" target="_blank"><img src="img/banner1.jpg" /></a>
 					<a href="http://study.163.com" target="_blank"><img src="img/banner2.jpg" /></a>
@@ -62,7 +72,8 @@
 					<div id="control" class="control">
 					</div>
 				</div>
-				<!--产品介绍-->
+				<!-- /轮播图 -->
+				<!-- 产品介绍 -->
 				<div class="m-producte wrap">
 					<div>
 						<i class="publicClass icon"></i>
@@ -89,7 +100,8 @@
 						</div>
 					</div>
 				</div>
-				<!--工作环境照片-->
+				<!-- /产品介绍 -->
+				<!-- 工作环境照片 -->
 				<div class="m-picture">
 					<div class="slider">
 						<div style="left: 0;">
@@ -108,19 +120,24 @@
 						</div>
 					</div>
 				</div>
+				<!-- /工作环境照片 -->
 			</div>
+			<!-- /主体-上部分 -->
+			<!-- 主体-下部分 -->
 			<div class="g-bd-bot wrap f-cl">
+				<!-- 主栏 -->
 				<div class="g-bd-l">
-					<!--类目选择-->
+					<!-- 类目选择 -->
 					<div id="tab" class="m-tab">
 						<div>产品设计</div>
 						<div>编程语言</div>
 					</div>
-					<!--课程列表-->
+					<!-- /类目选择 -->
+					<!-- 课程列表 -->
 					<div id="courseList" class="m-content">
-						<!--产品设计课程列表-->
+						<!-- 产品设计课程列表 -->
 						<div class="design cl" style="display: block;">
-							<!--课程-->
+							<!-- 课程 -->
 							<!--<div class="m-course">
 								<img src="http://img2.ph.126.net/1Md8406dmo1TPHnYD67fdw==/6598260537750239978.jpg">
 								<p class="courseName">Windows Phone 7 带来了什么?</p>
@@ -135,11 +152,14 @@
 									<p class="description">　本期极客活动将邀请国内在 Windows Phone 7 平台有重要表现的嘉宾们，他们将于我们共同探讨 WP 7 手机的到来带来了什么样的革新和体验，并一起来看看他们又做了哪些创新。</p>
 								</div>
 							</div>-->
+							<!-- /课程 -->
 						</div>
-						<!--编程语言课程列表-->
+						<!-- /产品设计课程列表 -->
+						<!-- 编程语言课程列表 -->
 						<div class="program cl" style="display: none;">
 						</div>
-						<!--翻页器-->
+						<!-- /编程语言课程列表 -->
+						<!-- 分页器 -->
 						<div class="m-turnPage">
 							<div id="prePage" class="pn">&lt;</div>
 							<ul id="coursePage" class="coursePage">
@@ -154,26 +174,32 @@
 							</ul>
 							<div id="nextPage" class="pn">&gt;</div>
 						</div>
+						<!-- /分页器 -->
 					</div>
+					<!-- /课程列表 -->
 				</div>
+				<!-- /主栏 -->
+				<!-- 侧栏 -->
 				<div class="g-bd-r">
 					<!--介绍视频-->
 					<div id="video" class="m-video">
 						<h4>机构介绍</h4>
 						<p>观看下面的视频来了解吧：</p>
 						<img src="img/video.jpg" />
-						<!--视频弹窗-->
+						<!-- 视频弹窗 -->
 						<div id="popupVideo" class="popupVideo">
 							<div class="mask"></div>
-							<!--视频框-->
+							<!-- 视频框 -->
 							<div class="play">
 								<span id="closeVideo" class="icon"></span>
 								<p>请观看下面的视频</p>
 								<video id="playWindow" controls="" poster="img/cover.jpg" src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" width="889" height="538"></video>
 							</div>
+							<!-- /视频框 -->
 						</div>
+						<!-- /视频弹窗 -->
 					</div>
-					<!--最热排行-->
+					<!-- 最热排行 -->
 					<div class="m-hotRanking">
 						<h4>最热排行</h4>
 						<div class="roll">
@@ -186,17 +212,24 @@
 							</a>-->
 						</div>
 					</div>
+					<!-- /最热排行 -->
+					
 				</div>
+				<!-- /侧栏 -->
+				
 			</div>
+			<!-- /主体-下部分 -->		
 		</div>
-		</div>
-		<!--底部-->
+		<!-- /主体 -->
+		<!-- 底部 -->
 		<div class="g-ft min-width">
 			<div class="m-ft">
+				<!-- 版权信息 -->
 				<div class="info">
 					<h1 class="icon">网易教育产品部</h1>
 					<p>©2014 icourse163.org 浙ICP备08114786号-1<br> icourses.cn 京ICP备12020869</p>
 				</div>
+				<!-- /版权信息 -->
 				<div class="friendLink">
 					<span>友情链接:</span>
 					<a href="">网易公开课</a>
@@ -216,6 +249,10 @@
 				</div>
 			</div>
 		</div>
+		<!-- /底部 -->
+		<!--JavaScript-->
+		<script src="js/md5.min.js"></script>
 		<script src="js/main.js"></script>
+		<!--/JavaScript-->
 	</body>
 </html>
