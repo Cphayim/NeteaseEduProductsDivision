@@ -40,7 +40,7 @@ var cookie = {
 		}
 		document.cookie = cookie;
 	},
-	//移除cookie
+	//删除cookie
 	remove: function(name, path, domain) {
 		document.cookie = name + '=' + '; path=' + path + '; domain=' + domain + '; max-age=0';
 	}
@@ -259,12 +259,32 @@ addEvent($('notTip'), 'click', function() {
 (function() {
 	var closePopup = $('closePopup'),
 		loginBtn = $('loginBtn'),
-		mess = $('loginMess');
+		mess = $('loginMess'),
+		userNameBox = $('userName'),
+		passwordBox = $('password'),
+		label = document.querySelector('.m-login').getElementsByTagName('label');
 	//关闭登录弹窗
 	addEvent(closePopup, 'click', function() {
 		document.querySelector('.m-popup').style.display = 'none';
 		$('userName').value = '';
 		$('password').value = '';
+	});
+	//placeholder
+	addEvent(userNameBox,'focus',function(){
+		label[0].style.display = 'none';
+	});
+	addEvent(passwordBox,'focus',function(){
+		label[1].style.display = 'none';
+	});
+	addEvent(userNameBox,'blur',function(){
+		if(userNameBox.value == ''){
+			label[0].style.display = 'block';
+		}
+	});
+	addEvent(passwordBox,'blur',function(){
+		if(passwordBox.value == ''){
+			label[1].style.display = 'block';
+		}
 	});
 	//登录
 	addEvent(loginBtn, 'click', function() {

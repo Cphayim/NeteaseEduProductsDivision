@@ -275,12 +275,14 @@ body {
 	width: 25px;
 	height: 25px;
 	background-position: -240px -68px;
+	cursor: pointer;
 }
 .m-login h2 {
 	padding: 25px 40px 10px;
 	line-height: 28px;
 	font: bold 18px/28px "microsoft yahei";
 	color: #444;
+	cursor: default;
 }
 .m-login input, .m-login button {
 	display: block;
@@ -289,8 +291,21 @@ body {
 	margin: 0 40px;
 	outline: none;
 }
-.m-login .inputBox input:first-child {
+.m-login .inputBox{
+	position: relative;
+}
+#userName{
 	margin-bottom: 30px;
+}
+.m-login .inputBox label{
+	position: absolute;left: 51px;
+	line-height: 45px;
+	font-size: 16px;
+	color: #333;
+	cursor: text;
+}
+.m-login .inputBox label:last-child{
+	top: 75px;
 }
 .m-login button {
 	margin-bottom: 30px;
