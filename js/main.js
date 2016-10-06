@@ -185,9 +185,9 @@ function removeClass(obj, cls) {
  * @param {Object} fn  执行函数
  */
 function addEvent(obj, ev, fn) {
-	if (obj.attachEvent) {
+	if (obj.attachEvent) { //IE
 		obj.attachEvent('on' + ev, fn)
-	} else {
+	} else { //Chrome, FireFox, Safari...
 		obj.addEventListener(ev, fn, false)
 	}
 }
@@ -270,19 +270,19 @@ addEvent($('notTip'), 'click', function() {
 		$('password').value = '';
 	});
 	//placeholder
-	addEvent(userNameBox,'focus',function(){
+	addEvent(userNameBox, 'focus', function() {
 		label[0].style.display = 'none';
 	});
-	addEvent(passwordBox,'focus',function(){
+	addEvent(passwordBox, 'focus', function() {
 		label[1].style.display = 'none';
 	});
-	addEvent(userNameBox,'blur',function(){
-		if(userNameBox.value == ''){
+	addEvent(userNameBox, 'blur', function() {
+		if (userNameBox.value == '') {
 			label[0].style.display = 'block';
 		}
 	});
-	addEvent(passwordBox,'blur',function(){
-		if(passwordBox.value == ''){
+	addEvent(passwordBox, 'blur', function() {
+		if (passwordBox.value == '') {
 			label[1].style.display = 'block';
 		}
 	});
