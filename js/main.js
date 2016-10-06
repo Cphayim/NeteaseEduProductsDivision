@@ -240,7 +240,7 @@ addEvent($('notTip'), 'click', function() {
 			addClass(followBtn, 'z-dis');
 			ajax({
 				method: 'GET',
-				url: 'http://study.163.com/webDev/attention.htm',
+				url: 'https://study.163.com/webDev/attention.htm',
 				success: function(data) {
 					if (data == "1") {
 						cookie.set('followSuc', 'yes', oneMonth());
@@ -313,7 +313,7 @@ addEvent($('notTip'), 'click', function() {
 			password = md5(password);
 			ajax({
 				method: 'GET',
-				url: 'http://study.163.com/webDev/login.htm',
+				url: 'https://study.163.com/webDev/login.htm',
 				data: {
 					userName: userName,
 					password: password
@@ -465,7 +465,7 @@ addEvent($('notTip'), 'click', function() {
 		var curList = type === 10 ? courseLists[0] : courseLists[1];
 		ajax({
 			method: 'GET',
-			url: 'http://study.163.com/webDev/couresByCategory.htm',
+			url: 'https://study.163.com/webDev/couresByCategory.htm',
 			data: {
 				pageNo: pageNo,
 				psize: 20,
@@ -546,7 +546,7 @@ addEvent($('notTip'), 'click', function() {
 	//hotRanking数据加载
 	ajax({
 		method: 'GET',
-		url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
+		url: 'https://study.163.com/webDev/hotcouresByCategory.htm',
 		success: function(data) {
 			console.log('hotRanking list request succeed.');
 			var list = JSON.parse(data);
