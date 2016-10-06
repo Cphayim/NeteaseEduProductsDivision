@@ -92,9 +92,7 @@ body {
 	margin: auto;
 }
 
-/**
- * 布局 
- */
+/* 布局 */
 
 .g-hd-top {
 	display: none;
@@ -130,12 +128,8 @@ body {
 	background: #2c3339;
 }
 
-/**
- * 模块
- */
-
-
-/* 提示栏 */
+/* 模块 */
+/* 顶部提示条 */
 
 .m-tips {
 	height: 35px;
@@ -158,7 +152,7 @@ body {
 	line-height: 25px;
 }
 
-/* logo */
+/* 网站LOGO */
 
 .m-logo .icon {
 	display: inline-block;
@@ -222,7 +216,7 @@ body {
 	color: #666;
 }
 
-/* 导航 */
+/* 头部导航 */
 
 .m-nav {
 	float: right;
@@ -247,7 +241,7 @@ body {
 	background-position: -198px -46px;
 }
 
-/* 登录 */
+/* 登录弹窗 */
 
 .m-popup {
 	display: none;
@@ -258,6 +252,9 @@ body {
 	width: 100%;
 	height: 100%;
 }
+
+/* 登录框 */
+
 .m-login {
 	position: fixed;
 	left: 50%;
@@ -291,20 +288,21 @@ body {
 	margin: 0 40px;
 	outline: none;
 }
-.m-login .inputBox{
+.m-login .inputBox {
 	position: relative;
 }
-#userName{
+#userName {
 	margin-bottom: 30px;
 }
-.m-login .inputBox label{
-	position: absolute;left: 51px;
+.m-login .inputBox label {
+	position: absolute;
+	left: 51px;
 	line-height: 45px;
 	font-size: 16px;
 	color: #333;
 	cursor: text;
 }
-.m-login .inputBox label:last-child{
+.m-login .inputBox label:last-child {
 	top: 75px;
 }
 .m-login button {
@@ -332,10 +330,7 @@ body {
 	color: #fff;
 }
 
-/* 主体 */
-
-
-/* 轮播 */
+/* 轮播图 */
 
 .m-banner {
 	position: relative;
@@ -377,6 +372,9 @@ body {
 .m-banner .control i.z-cur {
 	background-color: #333;
 }
+
+/* 产品介绍 */
+
 .m-producte {
 	height: 235px;
 	margin-top: 60px;
@@ -427,7 +425,7 @@ body {
 	text-decoration: underline;
 }
 
-/* 照片墙 */
+/* 工作环境照片 */
 
 .m-picture {
 	max-width: 1620px;
@@ -448,7 +446,7 @@ body {
 	margin: 0 2px;
 }
 
-/* 主栏课程 */
+/* 类目选择 */
 
 .m-tab {
 	width: 400px;
@@ -472,10 +470,16 @@ body {
 	background-color: #39A030;
 	color: #fff;
 }
+
+/* 课程列表 */
+
 .m-content {
 	min-height: 1240px;
 	margin-left: -10px;
 }
+
+/* 课程 */
+
 .m-course {
 	position: relative;
 	float: left;
@@ -562,6 +566,9 @@ body {
 	padding: 10px 0 0 16px;
 	font: 14px/24px 'Microsoft YaHei';
 }
+
+/* 分页器 */
+
 .m-turnPage {
 	float: right;
 	margin: 30px 5px 100px;
@@ -597,7 +604,7 @@ body {
 	color: #fff;
 }
 
-/* 侧栏课程 */
+/* 介绍视频 */
 
 .m-video, .m-hotRanking {
 	width: 223px;
@@ -661,6 +668,9 @@ body {
 .m-video .play video {
 	margin: 0 30px 30px;
 }
+
+/* 最热排行 */
+
 .m-hotRanking {
 	position: relative;
 	overflow: hidden;
@@ -709,7 +719,7 @@ body {
 	color: #999;
 }
 
-/* 底部 */
+/* 版权信息 */
 
 .m-ft {
 	width: 1100px;
@@ -765,11 +775,11 @@ body {
 	background-position: -210px -150px;
 }
 
-/* 功能(.f-) */
+/* 功能 */
 
-.f-dn {
-	display: none;
-}
+
+/* 清除浮动 */
+
 .f-cl::after {
 	content: '.';
 	display: block;
