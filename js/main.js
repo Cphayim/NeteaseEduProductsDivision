@@ -90,16 +90,7 @@ var ajax = function(opts) {
 		defaults.url += '?' + defaults.data;
 	}
 	//创建xhr
-	var xhr;
-	if (window.XMLHttpRequest) {
-
-		xhr = new XMLHttpRequest();
-
-	} else {
-
-		xhr = new ActiveXObject("Microsoft.XMLHTTP");
-
-	}
+	var xhr = new XMLHttpRequest();
 	//开启请求
 	xhr.open(defaults.method, defaults.url, defaults.async);
 	//发送请求
@@ -194,9 +185,9 @@ function removeClass(obj, cls) {
  * @param {Object} fn  执行函数
  */
 function addEvent(obj, ev, fn) {
-	if (obj.attachEvent) { //IE
+	if (obj.attachEvent) {
 		obj.attachEvent('on' + ev, fn)
-	} else { //Chrome, FireFox, Safari...
+	} else {
 		obj.addEventListener(ev, fn, false)
 	}
 }
@@ -279,19 +270,19 @@ addEvent($('notTip'), 'click', function() {
 		$('password').value = '';
 	});
 	//placeholder
-	addEvent(userNameBox, 'focus', function() {
+	addEvent(userNameBox,'focus',function(){
 		label[0].style.display = 'none';
 	});
-	addEvent(passwordBox, 'focus', function() {
+	addEvent(passwordBox,'focus',function(){
 		label[1].style.display = 'none';
 	});
-	addEvent(userNameBox, 'blur', function() {
-		if (userNameBox.value == '') {
+	addEvent(userNameBox,'blur',function(){
+		if(userNameBox.value == ''){
 			label[0].style.display = 'block';
 		}
 	});
-	addEvent(passwordBox, 'blur', function() {
-		if (passwordBox.value == '') {
+	addEvent(passwordBox,'blur',function(){
+		if(passwordBox.value == ''){
 			label[1].style.display = 'block';
 		}
 	});
